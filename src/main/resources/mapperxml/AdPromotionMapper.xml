@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xia.appsys.mapper.AdPromotionMapper">
+  <resultMap id="BaseResultMap" type="com.xia.appsys.entity.AdPromotion">
+    <!--@mbg.generated-->
+    <!--@Table ad_promotion-->
+    <id column="id" property="id" />
+    <result column="appId" property="appId" />
+    <result column="adPicPath" property="adPicPath" />
+    <result column="adPV" property="adPV" />
+    <result column="carouselPosition" property="carouselPosition" />
+    <result column="startTime" property="startTime" />
+    <result column="endTime" property="endTime" />
+    <result column="createdBy" property="createdBy" />
+    <result column="creationDate" property="creationDate" />
+    <result column="modifyBy" property="modifyBy" />
+    <result column="modifyDate" property="modifyDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, appId, adPicPath, adPV, carouselPosition, startTime, endTime, createdBy, creationDate, 
+    modifyBy, modifyDate
+  </sql>
+</mapper>

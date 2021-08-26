@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CheckStyle-IDEA">
+    <option name="configuration">
+      <map>
+        <entry key="checkstyle-version" value="8.41" />
+        <entry key="copy-libs" value="true" />
+        <entry key="location-0" value="BUNDLED:(bundled):Sun Checks" />
+        <entry key="location-1" value="BUNDLED:(bundled):Google Checks" />
+        <entry key="scan-before-checkin" value="false" />
+        <entry key="scanscope" value="JavaOnly" />
+        <entry key="suppress-errors" value="false" />
+      </map>
+    </option>
+  </component>
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="FindBugsConfigurable">
+    <option name="make" value="true" />
+    <option name="effort" value="default" />
+    <option name="priority" value="Medium" />
+    <option name="excludeFilter" value="" />
+  </component>
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$" />
+    <file type="web" url="file://F:/一些项目源码/高健/AppInfoSystem" />
+    <file type="web" url="file://F:/一些项目源码/黄辉/AppTest" />
+  </component>
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="PWA">
+    <option name="wasEnabledAtLeastOnce" value="true" />
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+  <component name="SuppressionsComponent">
+    <option name="suppComments" value="[]" />
+  </component>
+</project>

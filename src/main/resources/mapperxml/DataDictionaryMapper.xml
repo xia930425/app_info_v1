@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xia.appsys.mapper.DataDictionaryMapper">
+  <resultMap id="BaseResultMap" type="com.xia.appsys.entity.DataDictionary">
+    <!--@mbg.generated-->
+    <!--@Table data_dictionary-->
+    <id column="id" property="id" />
+    <result column="typeCode" property="typeCode" />
+    <result column="typeName" property="typeName" />
+    <result column="valueId" property="valueId" />
+    <result column="valueName" property="valueName" />
+    <result column="createdBy" property="createdBy" />
+    <result column="creationDate" property="creationDate" />
+    <result column="modifyBy" property="modifyBy" />
+    <result column="modifyDate" property="modifyDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, typeCode, typeName, valueId, valueName, createdBy, creationDate, modifyBy, modifyDate
+  </sql>
+
+  <select id="getDataDictionaryList" resultType="DataDictionary">
+        select * from data_dictionary
+            <trim prefix="where" prefixOverrides="and|or">
+              <if test="typeCode != null and typeCode != ''">
+                and typeCode = #{typeCode}
+              </if>
+            </trim>
+    </select>
+</mapper>

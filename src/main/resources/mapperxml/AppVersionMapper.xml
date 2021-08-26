@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xia.appsys.mapper.AppVersionMapper">
+  <resultMap id="BaseResultMap" type="com.xia.appsys.entity.AppVersion">
+    <!--@mbg.generated-->
+    <!--@Table app_version-->
+    <id column="id" property="id" />
+    <result column="appId" property="appId" />
+    <result column="versionNo" property="versionNo" />
+    <result column="versionInfo" property="versionInfo" />
+    <result column="publishStatus" property="publishStatus" />
+    <result column="downloadLink" property="downloadLink" />
+    <result column="versionSize" property="versionSize" />
+    <result column="createdBy" property="createdBy" />
+    <result column="creationDate" property="creationDate" />
+    <result column="modifyBy" property="modifyBy" />
+    <result column="modifyDate" property="modifyDate" />
+    <result column="apkLocPath" property="apkLocPath" />
+    <result column="apkFileName" property="apkFileName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, appId, versionNo, versionInfo, publishStatus, downloadLink, versionSize, createdBy, 
+    creationDate, modifyBy, modifyDate, apkLocPath, apkFileName
+  </sql>
+
+  <select id="getAppVersionList" resultMap="BaseResultMap">
+        select v.* ,
+          (select a.softwareName from app_info a where a.id=v.appId) as appName,
+          (select valueName from data_dictionary d where v.publishStatus = d.valueId
+                       and d.typeCode = 'PUBLISH_STATUS')as publishStatusName
+        from app_version v
+        <trim prefix="where" prefixOverrides="and|or">
+          <if test="appId != null">
+            and v.appId = #{appId}
+          </if>
+        </trim>
+    </select>
+
+  <insert id="add" parameterType="AppVersion" useGeneratedKeys="true" keyProperty="id">
+    insert into app_version(appId, versionNo, versionInfo, publishStatus,
+                            downloadLink, versionSize, createdBy, creationDate,
+                            modifyBy, modifyDate, apkLocPath, apkFileName)
+    VALUES (#{appId},#{versionNo},#{versionInfo},#{publishStatus},#{downloadLink},
+                #{versionSize},#{createdBy},#{creationDate},#{modifyBy},#{modifyDate},#{apkLocPath},#{apkFileName})
+  </insert>
+
+  <select id="getVersionCountByAppId" resultType="int">
+    select count(*) as count from app_version where appId = #{appId}
+  </select>
+
+  <delete id="deleteVersionByAppId">
+    delete from app_version where appId = #{appId}
+  </delete>
+
+  <select id="getAppVersionById" resultMap="BaseResultMap">
+    select * from app_version where id = #{id}
+  </select>
+
+  <update id="modify" parameterType="AppVersion">
+    update app_version
+    <trim prefix="set" suffixOverrides="," suffix="where id = #{id}">
+      <if test="versionNo != null and versionNo != ''">versionNo=#{versionNo},</if>
+      <if test="versionInfo != null and versionInfo != ''">versionInfo=#{versionInfo},</if>
+      <if test="publishStatus != null">publishStatus=#{publishStatus},</if>
+      <if test="downloadLink != null">downloadLink=#{downloadLink},</if>
+      <if test="apkLocPath != null and apkLocPath != ''">apkLocPath=#{apkLocPath},</if>
+      <if test="versionSize != null">versionSize=#{versionSize},</if>
+      <if test="apkFileName != null and apkFileName != ''">apkFileName=#{apkFileName},</if>
+      <if test="modifyBy != null">modifyBy=#{modifyBy},</if>
+      <if test="modifyDate != null">modifyDate=#{modifyDate},</if>
+    </trim>
+
+  </update>
+
+  <update id="deleteApkFile" parameterType="integer">
+    update app_version
+    set apkLocPath=null,
+    downloadLink=null,
+    apkFileName=null
+    where id = #{id}
+  </update>
+</mapper>

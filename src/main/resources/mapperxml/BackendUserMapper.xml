@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xia.appsys.mapper.BackendUserMapper">
+  <resultMap id="BaseResultMap" type="com.xia.appsys.entity.BackendUser">
+    <!--@mbg.generated-->
+    <!--@Table backend_user-->
+    <id column="id" property="id" />
+    <result column="userCode" property="userCode" />
+    <result column="userName" property="userName" />
+    <result column="userType" property="userType" />
+    <result column="createdBy" property="createdBy" />
+    <result column="creationDate" property="creationDate" />
+    <result column="modifyBy" property="modifyBy" />
+    <result column="modifyDate" property="modifyDate" />
+    <result column="userPassword" property="userPassword" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, userCode, userName, userType, createdBy, creationDate, modifyBy, modifyDate, 
+    userPassword
+  </sql>
+</mapper>

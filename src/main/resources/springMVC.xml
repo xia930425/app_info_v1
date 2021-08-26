@@ -1,0 +1,87 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd
+	   http://www.springframework.org/schema/aop
+	   http://www.springframework.org/schema/aop/spring-aop.xsd
+	   http://www.springframework.org/schema/task
+	   http://www.springframework.org/schema/task/spring-task.xsd">
+    <!-- 配置SpringMVC -->
+
+
+    <!--扫描控制层组件-->
+    <context:component-scan base-package="com.xia.appsys.controller"/>
+    <!--视图解析器  -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!--视图前缀-->
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <!--视图后缀-->
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+
+
+
+    <!--开启注解扫描  -->
+    <mvc:annotation-driven/>
+    <!--开放对静态资源的访问-->
+    <mvc:default-servlet-handler/>
+<!--    <mvc:resources mapping="/statics/**" location="/statics/"/>-->
+
+    <!--json的格式处理  -->
+    <mvc:annotation-driven>
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>application/json;charset=UTF-8</value>
+                    </list>
+                </property>
+            </bean>
+            <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>text/html;charset=UTF-8</value>
+                        <value>application/json</value>
+                    </list>
+                </property>
+                <!--日期格式-->
+                <property name="features">
+                    <list>
+                        <value>WriteDateUseDateFormat</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+    <!--多视图解析器  -->
+
+    
+    <!--文件上传-->
+    <bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="multipartResolver">
+        <property name="maxUploadSize" value="5000000"/>
+        <property name="defaultEncoding" value="UTF-8"/>
+    </bean>
+
+
+<!--    拦截器
+    <mvc:interceptors>
+&lt;!&ndash;       登录拦截器&ndash;&gt;
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="cn.smbms.interceptor.LoginInterceptor"/>
+        </mvc:interceptor>
+
+    </mvc:interceptors>-->
+
+
+
+</beans>
