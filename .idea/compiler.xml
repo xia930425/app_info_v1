@@ -11,6 +11,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel target="8">
       <module name="AppInfoSystem" target="1.8" />
+      <module name="Appmanager" target="1.8" />
       <module name="AppTest" target="1.8" />
     </bytecodeTargetLevel>
   </component>

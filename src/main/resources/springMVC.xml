@@ -72,15 +72,16 @@
     </bean>
 
 
-<!--    拦截器
+<!--    拦截器-->
     <mvc:interceptors>
-&lt;!&ndash;       登录拦截器&ndash;&gt;
         <mvc:interceptor>
-            <mvc:mapping path="/**"/>
-            <bean class="cn.smbms.interceptor.LoginInterceptor"/>
+            <mvc:mapping path="/mager/backend/**"/>
+            <mvc:mapping path="/dev/flatform/**"/>
+            <bean class="com.xia.appsys.interceptor.SysInterceptor"/>
         </mvc:interceptor>
 
-    </mvc:interceptors>-->
+    </mvc:interceptors>
+
 
 
 

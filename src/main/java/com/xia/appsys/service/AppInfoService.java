@@ -32,7 +32,7 @@ public interface AppInfoService {
      * @param delId
      * @return
      */
-    public int deleteAppInfoById(Integer delId);
+    public int  deleteAppInfoById(Integer delId);
 
     /**
      * 根据条件查询出app列表
@@ -92,7 +92,7 @@ public interface AppInfoService {
      * @param id
      * @return
      */
-    public int appsysdeleteAppById(Integer id) ;
+    public boolean appsysdeleteAppById(Integer id) throws Exception;
 
 
     /**

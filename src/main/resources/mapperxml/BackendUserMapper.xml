@@ -19,4 +19,12 @@
     id, userCode, userName, userType, createdBy, creationDate, modifyBy, modifyDate, 
     userPassword
   </sql>
+
+  <select id="getUserLogin" resultMap="BaseResultMap">
+    select b.*,d.valueName as  userTypeName from backend_user b ,data_dictionary d
+        where b.userType = d.valueId and d.typeCode='USER_TYPE'
+        <if test="userCode != null and userCode != ''">
+          and b.userCode = #{userCode}
+        </if>
+    </select>
 </mapper>

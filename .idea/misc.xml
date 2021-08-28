@@ -22,7 +22,11 @@
   </component>
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$" />
+    <file type="web" url="file://F:/一些项目源码/张静/AppInfoSystem(1)" />
+    <file type="web" url="file://F:/一些项目源码/张静/AppInfoSystem(2)" />
+    <file type="web" url="file://F:/一些项目源码/胡春来/Appmanager/Appmanager" />
     <file type="web" url="file://F:/一些项目源码/高健/AppInfoSystem" />
+    <file type="web" url="file://F:/一些项目源码/高健/AppInfoSystem(1)" />
     <file type="web" url="file://F:/一些项目源码/黄辉/AppTest" />
   </component>
   <component name="MavenProjectsManager">

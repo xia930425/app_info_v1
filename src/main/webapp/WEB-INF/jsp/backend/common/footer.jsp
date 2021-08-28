@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
 	</div>
    </div>
   </div>
@@ -6,7 +8,7 @@
 <!-- footer content -->
 	<footer>
 	  <div class="pull-right">
-	    ©2016 All Rights Reserved. 
+	    ï¿½2016 All Rights Reserved. 
 	  </div>
 	  <div class="clearfix"></div>
 	</footer>

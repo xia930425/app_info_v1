@@ -10,6 +10,8 @@ import javax.annotation.Resource;
 import com.xia.appsys.mapper.AppInfoMapper;
 import com.xia.appsys.service.AppInfoService;
 
+import java.io.File;
+import java.nio.MappedByteBuffer;
 import java.util.Date;
 import java.util.List;
 
@@ -76,6 +78,7 @@ public class AppInfoServiceImpl implements AppInfoService {
         return appInfoMapper.deleteApplogo(id);
     }
 
+
     @Override
     /**
      * 业务：根据appId删除APP信息
@@ -84,9 +87,49 @@ public class AppInfoServiceImpl implements AppInfoService {
      * 3、若版本表中无该app应用对应的版本信息，则直接删除app基本信息（app_info）。
      * 注意：事务控制，上传文件的删除
      */
-    public int appsysdeleteAppById(Integer id) {
-        return 0;
-    }
+    public boolean appsysdeleteAppById(Integer id) throws Exception {
+
+            boolean flag = false;
+            int versionCount = appVersionMapper.getVersionCountByAppId(id);
+            List<AppVersion> appVersionList = null;
+
+            if (versionCount > 0) {
+                //删除上传的apk文件
+                appVersionList = appVersionMapper.getAppVersionList(id);
+                for (AppVersion appVersion : appVersionList) {
+                    if (appVersion.getApkLocPath() != null && !appVersion.getApkLocPath().equals("")) {
+                        File file = new File(appVersion.getApkLocPath());
+                        if (file.exists()) {
+                            if (!file.delete()) {
+                                throw new Exception();
+                            }
+                        }
+                    }
+                }
+                //<2> 删除app_version表数据
+                appVersionMapper.deleteVersionByAppId(id);
+            }
+            //删除app_version表数据
+            AppInfo appInfo = appInfoMapper.getAppInfo(id, null);
+            if (appInfo.getLogoLocPath() != null && !appInfo.getLogoLocPath().equals("")) {
+                File file = new File(appInfo.getLogoLocPath());
+                if (file.exists()) {
+                    if (!file.delete()) {
+                        throw new Exception();
+                    }
+                }
+
+            }
+            if(appInfoMapper.deleteAppInfoById(id) > 0){
+                flag = true;
+            }
+
+            return flag;
+        }
+
+
+
+
 
     @Override
     public boolean appsysUpdateSaleStatusByAppId(AppInfo appInfo) throws Exception {
@@ -103,7 +146,7 @@ public class AppInfoServiceImpl implements AppInfoService {
         if (null == aInfo) {
             return false;
         } else {
-            switch (appInfo.getStatus()) {
+            switch (aInfo.getStatus()) {
                 case 2://当状态为审核通过时，可以进行上架操作
                     onSale(aInfo, operator, 4, 2);
                     break;
@@ -123,13 +166,13 @@ public class AppInfoServiceImpl implements AppInfoService {
 
     private void onSale(AppInfo appInfo, Integer operator,
                         Integer appInfoStatus, Integer versionStatus) throws Exception {
-        offSale(appInfo,operator,appInfoStatus);
+        offSale(appInfo, operator, appInfoStatus);
         setSaleSwitchToAppVersion(appInfo, operator, versionStatus);
 
 
     }
 
-    private boolean offSale(AppInfo appInfo,Integer operator,Integer appInfStatus) throws Exception{
+    private boolean offSale(AppInfo appInfo, Integer operator, Integer appInfStatus) throws Exception {
         AppInfo _appInfo = new AppInfo();
         _appInfo.setId(appInfo.getId());
         _appInfo.setStatus(appInfStatus);
@@ -145,7 +188,7 @@ public class AppInfoServiceImpl implements AppInfoService {
         appVersion.setPublishStatus(saleStatus);
         appVersion.setModifyBy(operator);
         appVersion.setModifyDate(new Date(System.currentTimeMillis()));
-
+        appVersionMapper.modify(appVersion);
         return false;
     }
 }
